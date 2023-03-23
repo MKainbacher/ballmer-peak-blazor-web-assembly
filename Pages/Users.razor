@@ -1,0 +1,36 @@
+﻿@using ballmer_peak_web_assembly.Model;
+@using ballmer_peak_web_assembly.Services;
+@using ballmer_peak_web_assembly.Components;
+@inject UserService userService;
+
+@page "/users";
+<PageTitle>Ballmer Peak - Users</PageTitle>
+
+<div class="content__container">
+    <h3>List of Users</h3>
+    @if(users != null)
+    {
+        <ul class="users">
+            @foreach (var user in users)
+            {
+                <li class="users__entry">
+                    <a class="nav-link" href="@($"users/{user.Id}")">@user.Name</a>
+                </li>
+            }
+        </ul>
+    } else
+    {
+        <div class="loader-container">
+            <Loader />
+        </div>
+    }
+</div>
+
+@code {
+    private IEnumerable<User>? users;
+
+    protected override async Task OnInitializedAsync()
+    {
+        users = await userService.GetAllAsync();
+    }
+}

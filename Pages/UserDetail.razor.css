@@ -1,0 +1,9 @@
+﻿.content__container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.loader-container {
+    flex: 1;
+}

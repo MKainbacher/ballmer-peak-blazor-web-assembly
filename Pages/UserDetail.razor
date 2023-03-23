@@ -1,0 +1,36 @@
+﻿@using ballmer_peak_web_assembly.Model;
+@using ballmer_peak_web_assembly.Services;
+@using ballmer_peak_web_assembly.Components;
+@using Newtonsoft.Json;
+@inject UserService UserService;
+
+@page "/users/{userId}";
+<PageTitle>@($"Ballmer Peak{(user != null ? $"- {user.Name}" : "")}")</PageTitle>
+
+<div class="content__container">
+    <h3>UserDetail</h3>
+
+    @if(user != null)
+    {
+        <pre>@JsonConvert.SerializeObject(user, new JsonSerializerSettings(){Formatting = Formatting.Indented})</pre>
+    } else
+    {
+        <div class="loader-container">
+            <Loader />
+        </div>
+    }
+
+    <a href="/users">Back</a>
+</div>
+
+@code {
+    [Parameter]
+    public string? UserId { get; set; }
+
+    private User? user;
+
+    protected override async Task OnInitializedAsync()
+    {
+        user = await UserService.GetByIdAsync(UserId!);
+    }
+}

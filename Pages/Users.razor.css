@@ -1,0 +1,27 @@
+﻿.content__container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.users {
+    list-style: none;
+    padding: 0 8px;
+}
+
+.users__entry {
+    padding: 8px 16px;
+}
+
+.users__entry a {
+    color: black;
+    padding: 8px 16px;
+}
+
+    .users__entry a:hover {
+        background: rgba(0, 0, 0, 0.04);
+    }
+
+.loader-container {
+    flex: 1;
+}
